@@ -1,0 +1,24 @@
+{
+  "name": "viralevo",
+  "version": "0.6.4",
+  "description": "Self-evolving viral content trend advisor for OpenClaw",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "setup": "python3 setup.py",
+    "onboard": "node scripts/onboarding.js",
+    "collect": "node scripts/collect.js",
+    "report": "python3 scripts/report.py",
+    "verify": "python3 scripts/verify.py --hours 24",
+    "weekly": "python3 scripts/weekly_review.py",
+    "feedback": "python3 scripts/feedback.py",
+    "feedback:list": "python3 scripts/feedback.py --list"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "better-sqlite3": "^9.4.0",
+    "dotenv": "^16.0.0"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_note": "This file documents the scheduled tasks ViralEvo uses. Scheduling is configured through OpenClaw's cron system, not this file. See SKILL.md for setup instructions.",
+  "tasks": [
+    {
+      "id": "daily_collect_report",
+      "description": "Fetch trend signals and generate daily report",
+      "commands": [
+        "node scripts/collect.js",
+        "python3 scripts/report.py"
+      ],
+      "schedule": "Daily at your configured report time (set during onboarding)",
+      "timeout_minutes": 15
+    },
+    {
+      "id": "verify_24h",
+      "description": "Verify accuracy of predictions made 24h ago",
+      "commands": ["python3 scripts/verify.py --hours 24"],
+      "schedule": "Daily, 5 minutes after daily_collect_report",
+      "timeout_minutes": 5
+    },
+    {
+      "id": "verify_72h",
+      "description": "Verify accuracy of predictions made 72h ago",
+      "commands": ["python3 scripts/verify.py --hours 72"],
+      "schedule": "Daily, 65 minutes after daily_collect_report",
+      "timeout_minutes": 5
+    },
+    {
+      "id": "weekly_review",
+      "description": "Analyze weekly accuracy and update model weights",
+      "commands": ["python3 scripts/weekly_review.py"],
+      "schedule": "Every Monday at your configured report time",
+      "timeout_minutes": 15
+    }
+  ]
+}

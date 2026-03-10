@@ -1,0 +1,27 @@
+# Environment variables — never commit real keys
+.env
+*.env
+!.env.example
+
+# Runtime data — local only, not part of the skill
+data/*.db
+data/backups/
+logs/
+reports/
+config.json
+user_profile.json
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db

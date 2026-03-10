@@ -1,0 +1,39 @@
+# ViralEvo — Viral Content Trend Advisor
+
+## What this skill does
+ViralEvo monitors content platforms, predicts which topics will go viral in a specific niche,
+and self-improves its prediction accuracy weekly by analyzing its own prediction errors.
+
+## Available commands
+- `node {baseDir}/scripts/onboarding.js` — first-time setup wizard
+- `node {baseDir}/scripts/collect.js` — fetch fresh data from all configured sources
+- `python3 {baseDir}/scripts/report.py` — generate today's trend report
+- `python3 {baseDir}/scripts/verify.py --hours 24` — verify yesterday's predictions
+- `python3 {baseDir}/scripts/verify.py --hours 72` — verify 72h-old predictions
+- `python3 {baseDir}/scripts/weekly_review.py` — run self-evolution (Mondays recommended)
+- `python3 {baseDir}/scripts/keywords.py --show` — view keyword index
+- `python3 {baseDir}/scripts/keywords.py --add "term"` — add keyword
+- `python3 {baseDir}/setup.py` — check all system requirements
+
+## Natural language triggers (agent should run collect → report)
+- "今天该发什么" / "what should I post today"
+- "有什么趋势" / "any trends"
+- "给我看趋势报告" / "show me trends"
+- "我的赛道有什么热点" / "what's trending in my niche"
+
+## Feedback intake (agent should log to personal_feedback table)
+When user says things like:
+- "那个视频发了，获得了80k播放" → extract: views=80000, match to recent topic
+- "The hair clips post did well — 50k views on TikTok" → extract: views=50000, platform=tiktok
+Always show matched topic and ask for confirmation before logging.
+
+## Data location
+All data: ~/.openclaw/workspace/viralevo/
+Database: ~/.openclaw/workspace/viralevo/data/trends.db
+Config:   ~/.openclaw/workspace/viralevo/config.json
+Reports:  ~/.openclaw/workspace/viralevo/reports/
+
+## Privacy note
+All collected data and prediction models are stored locally on the user's machine.
+The skill makes outbound requests only to fetch public trend signals (HackerNews, Dev.to,
+Reddit, Product Hunt, Tavily). Tavily receives only search query strings — no personal data.
